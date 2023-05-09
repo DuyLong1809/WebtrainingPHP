@@ -118,4 +118,13 @@ class ProductService
             }
         }
     }
+    public function DeleteProduct($id)
+    {
+        $product = $this->getProductById($id);
+        $image = public_path('images/' . $product->image);
+        if ($image) {
+            unlink($image);
+        }
+        return $this->productRepository->delete($id);
+    }
 }
