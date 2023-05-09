@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Img_slide;
 use App\Service\CategoryService;
 use App\Service\HangsanxuatService;
@@ -69,11 +70,12 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $product = $this->productService->createProduct($request);
+        return redirect()->route('product.index')->with('success','Thêm Thành Công');
     }
 
     /**
