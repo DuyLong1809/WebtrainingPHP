@@ -131,4 +131,12 @@ class ProductService
     {
         return $this->productRepository->search($name);
     }
+    public function getCategoryById($id_cate)
+    {
+        return $this->productRepository->getCategoryById($id_cate);
+    }
+    public function getManufactureById($id_manu)
+    {
+        return $this->productRepository->getManufactureById($id_manu);
+    }
 }

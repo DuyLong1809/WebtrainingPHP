@@ -32,11 +32,19 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $products = $this->productService->getAllProduct();
         $categories = $this->categoryService->getAllCategory();
+        $cate_id = $request->input('id_cate');
         $Hangsxs = $this->HangsxService->GetAll();
+        $manu_id = $request->input('id_manu');
+        if ($cate_id) {
+            $products = $this->productService->getCategoryById($cate_id);
+        }
+        if($manu_id) {
+            $products = $this->productService->getManufactureById($manu_id);
+        }
         $perpage = 12;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $products->slice(($currentPage - 1) * $perpage, $perpage);

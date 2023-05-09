@@ -40,4 +40,14 @@ class ProductRepository implements Interface\ProductRepositoryInterface
     {
         return $this->productModel->where('name','like','%'.$name.'%')->get();
     }
+    public function getCategoryById($id_cate)
+    {
+        $product =  $this->productModel->where('id_cate', $id_cate)->get();
+        return $product;
+    }
+    public function getManufactureById($id_manu)
+    {
+        $product =  $this->productModel->where('id_manufact', $id_manu)->get();
+        return $product;
+    }
 }
