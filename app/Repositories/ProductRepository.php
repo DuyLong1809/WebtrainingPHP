@@ -26,4 +26,10 @@ class ProductRepository implements Interface\ProductRepositoryInterface
     {
         return $this->productModel->create($data);
     }
+    public function update($id, array $data)
+    {
+        $find_id = $this->productModel->findOrFail($id);
+        $product_update = $find_id->update($data);
+        return $product_update;
+    }
 }

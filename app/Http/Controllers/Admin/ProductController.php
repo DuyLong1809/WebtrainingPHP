@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Img_slide;
 use App\Service\CategoryService;
 use App\Service\HangsanxuatService;
@@ -82,7 +83,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -98,11 +99,15 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $product = $this->productService->getProductById($id);
+        $img_slide = $this->img_slide->where('id_product', $id)->get();
+        $categories = $this->categoryService->getAllCategory();
+        $Hangsxs = $this->HangsxService->GetAll();
+        return view('admin/product-update', compact('product', 'categories', 'Hangsxs', 'img_slide'));
     }
 
     /**
@@ -110,11 +115,13 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
-        //
+        $product_imgslide = $this->productService->UpdateImgSlide($id, $request);
+        $product = $this->productService->UpdateProduct($request,$id);
+        return redirect()->route('product.index',$id)->with('update_success','Cập nhật thành công');
     }
 
     /**
