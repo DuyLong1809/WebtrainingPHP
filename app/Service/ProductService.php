@@ -29,6 +29,10 @@ class ProductService
     {
         return $this->productRepository->all();
     }
+    public function getProductById($id)
+    {
+        return $this->productRepository->getProductById($id);
+    }
     public function createProduct(ProductRequest $request)
     {
         $data['name'] = $request['name'];

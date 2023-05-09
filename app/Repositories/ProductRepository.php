@@ -18,6 +18,10 @@ class ProductRepository implements Interface\ProductRepositoryInterface
     {
         return $this->productModel->all();
     }
+    public function getProductById($id)
+    {
+        return $this->productModel->findOrFail($id);
+    }
     public function createProduct(array $data)
     {
         return $this->productModel->create($data);

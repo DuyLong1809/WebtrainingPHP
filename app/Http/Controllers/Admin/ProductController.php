@@ -86,7 +86,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->productService->getProductById($id);
+        $categories = $this->categoryService->getAllCategory();
+        $Hangsxs = $this->HangsxService->GetAll();
+        $id_cate = $product->id_cate;
+        $products = $this->productService->getAllProduct()->where('id_cate', $id_cate)->take(3);
+        return view('detail', compact('Hangsxs','categories','product', 'products'));
     }
 
     /**
