@@ -30,8 +30,6 @@ Route::group(
 //            Route::get('/login', function () {
 //                return view('admin/login');
 //            });
-        Route::resource('product', ProductController::class);
-        Route::get('search', [ProductController::class, 'search_admin'])->name('product.search');
         Route::middleware(['guest'])->group(function () {
             Route::post('/register', [LoginController::class, 'register']);
             Route::get('/register', function () {
@@ -45,6 +43,8 @@ Route::group(
 
         Route::middleware(['auth'])->group(function () {
             Route::post('/logout',[LoginController::class, 'logout'])->name('logout_success');
+            Route::resource('product', ProductController::class);
+            Route::get('search', [ProductController::class, 'search_admin'])->name('product.search');
         });
     }
 
