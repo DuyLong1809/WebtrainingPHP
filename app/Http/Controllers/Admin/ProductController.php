@@ -135,4 +135,15 @@ class ProductController extends Controller
         $product = $this->productService->DeleteProduct($id);
         return redirect()->route('product.index')->with('delete_success', 'Xóa Thành Công');
     }
+    public function search_admin(Request $request)
+    {
+        $perpage = 12;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $categories = $this->categoryService->getAllCategory();
+        $Hangsxs = $this->HangsxService->GetAll();
+        $query = $request->get('search');
+        $products = $this->productService->SearchProduct($query);
+        $paginator = new LengthAwarePaginator($products, count($products), $perpage, $currentPage);
+        return view('admin/product', compact('paginator','products','categories','Hangsxs'));
+    }
 }

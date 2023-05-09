@@ -36,4 +36,8 @@ class ProductRepository implements Interface\ProductRepositoryInterface
     {
         return $this->productModel->destroy($id);
     }
+    public function search($name)
+    {
+        return $this->productModel->where('name','like','%'.$name.'%')->get();
+    }
 }

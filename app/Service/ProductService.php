@@ -127,4 +127,8 @@ class ProductService
         }
         return $this->productRepository->delete($id);
     }
+    public function SearchProduct($name)
+    {
+        return $this->productRepository->search($name);
+    }
 }
