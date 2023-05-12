@@ -12,6 +12,4 @@ class Img_slideRepository extends BaseRepository implements Interface\Img_slideR
     {
         $this->model = $img_slideModel;
     }
-
-
 }
