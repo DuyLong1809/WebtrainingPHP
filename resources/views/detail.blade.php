@@ -27,7 +27,7 @@
             <div class="detail-content">
                 <h3 class="detail-title">{{$product->name}}</h3>
                 <p class="detail-content-1">Category: {{$product->category->name_cate}}</p>
-                <p class="detail-content-1">Manufacturer: {{$product->hangsanxuat->name_manufact}}</p>
+                <p class="detail-content-1">Manufacturer: {{$product->manufacturer->name_manufact}}</p>
                 <p class="detail-content-1">Price: {{$product->price}}</p>
                 <div class="detail-des">
                     <p class="detail-des-1">Product Description:</p>

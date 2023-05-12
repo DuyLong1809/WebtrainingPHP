@@ -4,22 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Category;
 
-class CategoryRepository implements Interface\CategoryRepositoryInterface
+class CategoryRepository extends BaseRepository implements Interface\CategoryRepositoryInterface
 {
-    protected $categoryModel;
-
+    protected Category $categoryModel;
     public function __construct(Category $categoryModel)
     {
-        $this->categoryModel = $categoryModel;
+        $this->model = $categoryModel;
     }
 
-    public function getIdCate($id)
-    {
-        return $this->categoryModel->findOrFail($id);
-    }
-
-    public function getAllCategory()
-    {
-        return $this->categoryModel->all();
-    }
 }

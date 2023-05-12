@@ -60,9 +60,9 @@
                             </div>
                             <div class="select_cate">
                                 <select name="id_manufact" id="" class="">
-                                    @foreach($Hangsxs as $Hangsanxuat)
+                                    @foreach($Manufacturers as $manu)
                                         <option
-                                            value="{{$Hangsanxuat->id}}" {{$product->id_manufact == $Hangsanxuat->id ? 'selected':""}}>{{$Hangsanxuat->name_manufact}}</option>
+                                            value="{{$manu->id}}" {{$product->id_manufact == $manu->id ? 'selected':""}}>{{$manu->name_manufact}}</option>
                                     @endforeach
                                 </select>
                             </div>

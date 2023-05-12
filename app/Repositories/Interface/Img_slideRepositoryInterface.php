@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interface;
 
-interface ProductRepositoryInterface
+interface Img_slideRepositoryInterface
 {
     public function all();
 
@@ -13,10 +13,4 @@ interface ProductRepositoryInterface
     public function update($id, array $data);
 
     public function delete($id);
-
-    public function search($name);
-
-    public function getCategoryById($id_cate);
-
-    public function getManufactureById($id_manu);
 }

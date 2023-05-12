@@ -12,13 +12,9 @@ class LoginController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-
         $registerData = $request->all();
-
         $registerData['password'] = bcrypt($request->password);
-
         $user = User::create($registerData);
-
         $accessToken = $user->createToken('authToken')->accessToken;
 
         return redirect()->route('login', ['user' => Auth::user()]);
@@ -32,6 +28,7 @@ class LoginController extends Controller
         if (!Auth::attempt($loginData)) {
             return redirect()->back()->withErrors(['message' => 'wrong username or password']);
         }
+
         $accessToken = Auth::user()->createToken('authToken')->accessToken;
         return redirect()->route('trangchu');
 //        return response()->json(['user' => Auth::user(), 'access_token' => $accessToken], 200);

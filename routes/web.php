@@ -17,19 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'getAllproduct'])->name('trangchu');
 
-//Route::get('/search', [ProductController::class, 'search_index'])->name('index.search');
-//Route::get('/filter', [ProductController::class,'getAllfilter'])->name('filter');
 Route::group(
     [
         'prefix' => 'admin',
         'name' => 'admin.',
-
     ],
     function () {
-//            Route::post('/login_success', [LoginController::class, 'login']);
-//            Route::get('/login', function () {
-//                return view('admin/login');
-//            });
         Route::middleware(['guest'])->group(function () {
             Route::post('/register', [LoginController::class, 'register']);
             Route::get('/register', function () {
@@ -47,8 +40,4 @@ Route::group(
             Route::get('search', [ProductController::class, 'search_admin'])->name('product.search');
         });
     }
-
 );
-//---------ADMIN----------//
-
-////Route::get('/admin/product/delete/',[ProductController::class, 'deleteProduct'])->name('admin.delete');

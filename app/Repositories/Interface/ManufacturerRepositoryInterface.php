@@ -2,13 +2,11 @@
 
 namespace App\Repositories\Interface;
 
-interface HangsanxuatRepositoryInterface
+interface ManufacturerRepositoryInterface
 {
-    public function GetAllHangsx();
-
 //    public function CreateManu(array $data);
-//
 //    public function UpdateManu($id, array $data);
-    public function GetIdManu($id);
+    public function all();
+    public function findById($id);
 //    public function DeleteManu($id);
 }

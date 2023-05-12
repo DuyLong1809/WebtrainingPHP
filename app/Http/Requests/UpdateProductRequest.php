@@ -34,7 +34,6 @@ class UpdateProductRequest extends FormRequest
 
     public function messages()
     {
-
         return [
             'name.required' => 'Please enter product name',
             'id_cate.required' => 'Please select a category',

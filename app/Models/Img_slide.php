@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Img_slide extends Model
 {
     use HasFactory;
+
     protected $table = '_img_slide';
 
-    protected $fillable = [
-        'name_imgslide',
-        'id_product',
-    ];
+    protected $fillable =
+        [
+            'name_imgslide',
+            'id_product',
+        ];
 
     public function Product()
     {
