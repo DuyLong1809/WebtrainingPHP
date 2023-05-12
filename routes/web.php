@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProductController::class, 'getAllproduct'])->name('trangchu');
-
 Route::group(
     [
         'prefix' => 'admin',
@@ -38,6 +36,7 @@ Route::group(
             Route::post('/logout',[LoginController::class, 'logout'])->name('logout_success');
             Route::resource('product', ProductController::class);
             Route::get('search', [ProductController::class, 'search_admin'])->name('product.search');
+            Route::get('/', [ProductController::class, 'getAllproduct'])->name('trangchu');
         });
     }
 );
