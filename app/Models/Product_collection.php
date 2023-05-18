@@ -20,7 +20,7 @@ class Product_collection extends Model
 
     public function category_collection()
     {
-        return $this->embedsOne(Category_collection::class, 'Category_collection');
+        return $this->embedsOne(Category_collection::class, 'category_collection');
     }
 
     public function manufacturer_collection()

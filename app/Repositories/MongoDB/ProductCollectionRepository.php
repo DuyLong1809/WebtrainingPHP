@@ -22,7 +22,7 @@ class ProductCollectionRepository extends BaseRepository implements Interface\Pr
     }
     public function findCateById($id)
     {
-        $product_cate =  $this->model->with('category_collection')->find($id);
+        $product_cate =  $this->model->find($id);
         $category_id = $product_cate->id_cate;
         $category = Category_collection::where('_id', $category_id)->first();
         $category_name = $category->name_cate;
@@ -31,7 +31,7 @@ class ProductCollectionRepository extends BaseRepository implements Interface\Pr
 
     public function findManuById($id)
     {
-        $product_Manu =  $this->model->with('Manufacturer_collection')->find($id);
+        $product_Manu =  $this->model->find($id);
         $manufacturer_id = $product_Manu->id_manufact;
         $manufacturer = Manufacturer_collection::where('_id', $manufacturer_id)->first();
         $manufacturer_name = $manufacturer->name_manufact;
