@@ -17,7 +17,7 @@
     @include('master/filter')
 
     <div class="filter-detail">
-        <form method="POST" action="{{route('product.update',$product->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('product.update',$product->getId())}}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="update-product-detail">
@@ -33,7 +33,7 @@
                                 <span class="icon-star">*</span>
                             </div>
                             <div class="input-product">
-                                <input type="text" value="{{$product->name}}" placeholder="" name="name" >
+                                <input type="text" value="{{$product->getName()}}" placeholder="" name="name" >
                             </div>
                             @error('name')
                             <div class="error-message">{{ $message }}</div>
@@ -46,7 +46,7 @@
                                 <select name="id_cate" id="" class="">
                                     @foreach($categories as $category)
                                         <option
-                                            value="{{$category->id}}" {{$product->id_cate == $category->id ? 'selected':""}}>{{$category->name_cate}}</option>
+                                            value="{{$category->id}}" {{$product->getIdCate() == $category->id ? 'selected':""}}>{{$category->name_cate}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -62,7 +62,7 @@
                                 <select name="id_manufact" id="" class="">
                                     @foreach($Manufacturers as $manu)
                                         <option
-                                            value="{{$manu->id}}" {{$product->id_manufact == $manu->id ? 'selected':""}}>{{$manu->name_manufact}}</option>
+                                            value="{{$manu->id}}" {{$product->getIdManufact() == $manu->id ? 'selected':""}}>{{$manu->name_manufact}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -75,7 +75,7 @@
                                 <span class="icon-star">*</span>
                             </div>
                             <div class="input-product">
-                                <input type="text" value="{{$product->price}}" placeholder="" name="price">
+                                <input type="text" value="{{$product->getPrice()}}" placeholder="" name="price">
                             </div>
                             @error('price')
                             <div class="error-message">{{ $message }}</div>
@@ -84,14 +84,14 @@
                         <div class="tilte-input">
                             <div class="title-product-and-icon-star"><p class="title-product">Mô Tả</p></div>
                             <div>
-                                <textarea class="input-product-textarea1" name="mota" id="">{{$product->mota}}</textarea>
+                                <textarea class="input-product-textarea1" name="mota" id="">{{$product->getMota()}}</textarea>
                             </div>
                             @error('mota')
                             <div class="error-message">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="button-huy-and-update">
-                            <div class="button-huy1 " onclick="goToPage('{{route('product.index')}}')" type="">Hủy</div>
+                            <div class="button-huy1 " onclick="goToPage('{{route('product.index')}}')">Hủy</div>
                             <button class="button-update" type="submit">Lưu</button>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                             <span class="icon-star">*</span>
                         </div>
                         <div class="image-detail-update1">
-                            <img class="update_image" src="{{asset('/images/'.$product->image)}}">
+                            <img class="update_image" src="{{asset('/images/'.$product->getImage())}}">
                             <div class="update-delete-img">
                                 <div class="update-img">Cập nhật</div>
                                 <input type="file" name="image" id="image" class="input-update-img" hidden>

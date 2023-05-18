@@ -25,17 +25,17 @@
         </div>
         <div class="detail-content-image">
             <div class="detail-content">
-                <h3 class="detail-title">{{$product->name}}</h3>
-                <p class="detail-content-1">Category: {{$product->category->name_cate}}</p>
-                <p class="detail-content-1">Manufacturer: {{$product->manufacturer->name_manufact}}</p>
-                <p class="detail-content-1">Price: {{$product->price}}</p>
+                <h3 class="detail-title">{{$product->getName()}}</h3>
+                <p class="detail-content-1">Category: {{$cate_id}}</p>
+                <p class="detail-content-1">Manufacturer: {{$manu_id}}</p>
+                <p class="detail-content-1">Price: {{$product->getPrice()}}</p>
                 <div class="detail-des">
                     <p class="detail-des-1">Product Description:</p>
-                    <p class="detail-des-text">{{$product->mota}}</p>
+                    <p class="detail-des-text">{{$product->getMota()}}</p>
                 </div>
             </div>
             <div class="detail-image-1">
-                <img class="detail-image-2" src="{{asset('/images/'.$product->image)}}">
+                <img class="detail-image-2" src="{{asset('/images/'.$product->getImage())}}">
             </div>
         </div>
         <div class="detail-goi-y">

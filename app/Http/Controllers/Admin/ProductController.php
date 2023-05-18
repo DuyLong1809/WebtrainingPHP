@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Img_slide;
+use App\Models\Img_slide_collection;
 use App\Service\CategoryService;
 use App\Service\ManufacturerService;
 use App\Service\ProductService;
@@ -25,7 +26,7 @@ class ProductController extends Controller
         ProductService $productService,
         CategoryService $categoryService,
         ManufacturerService $ManuService,
-        Img_slide $img_slide,
+        Img_slide_collection $img_slide,
     ) {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
@@ -51,15 +52,14 @@ class ProductController extends Controller
         if ($manu_id) {
             $products = $this->productService->getManufactureById($manu_id);
         }
-        $perpage = 12;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $products->slice(($currentPage - 1) * $perpage, $perpage);
-        $paginator = new LengthAwarePaginator($currentPageItems, count($products), $perpage);
-        $paginator->setPath(request()->url());
+//        $perpage = 12;
+//        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+//        $currentPageItems = $products->slice(($currentPage - 1) * $perpage, $perpage);
+//        $paginator = new LengthAwarePaginator($currentPageItems, count($products), $perpage);
+//        $paginator->setPath(request()->url());
         return view(
             'admin/product',
             compact(
-                'paginator',
                 'products',
                 'categories',
                 'Manufacturers',
@@ -71,17 +71,16 @@ class ProductController extends Controller
         $products = $this->productService->getAllProduct();
         $categories = $this->categoryService->getAllCategory();
         $Manufacturers = $this->ManuService->GetAll();
-        $perpage = 12;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $products->slice(($currentPage - 1) * $perpage, $perpage);
-        $paginator = new LengthAwarePaginator($currentPageItems, count($products), $perpage);
-        $paginator->setPath(request()->url());
+//        $perpage = 12;
+//        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+//        $currentPageItems = $products->slice(($currentPage - 1) * $perpage, $perpage);
+//        $paginator = new LengthAwarePaginator($currentPageItems, count($products), $perpage);
+//        $paginator->setPath(request()->url());
         return view(
             'index',
             compact(
                 'Manufacturers',
                 'categories',
-                'paginator',
                 'products',
             ));
     }
@@ -116,18 +115,24 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = $this->productService->getProductById($id);
+        $cate_id = $this->productService->getNameCateById($id);
+        $manu_id = $this->productService->getNameManuById($id);
+        $product = $this->productService->getProductId($id);
         $categories = $this->categoryService->getAllCategory();
         $Manufacturers = $this->ManuService->GetAll();
-        $id_cate = $product->id_cate;
-        $products = $this->productService->getAllProduct()->where('id_cate', $id_cate)->take(3);
+        $id_cate = $product->getIdCate();
+        $products = $this->productService->AllProduct()->where('id_cate', $id_cate)->take(3);
+        $relatedProducts = $this->productService->AllProduct()->where('id_cate', $id_cate)->where('_id', '!=', $id);
         return view(
             'detail',
             compact(
                 'Manufacturers',
                 'categories',
                 'product',
+                'cate_id',
+                'manu_id',
                 'products',
+                'relatedProducts',
             ));
     }
 
@@ -139,7 +144,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->productService->getProductById($id);
+        $product = $this->productService->getProductId($id);
         $img_slide = $this->img_slide->where('id_product', $id)->get();
         $categories = $this->categoryService->getAllCategory();
         $Manufacturers = $this->ManuService->GetAll();
@@ -185,14 +190,13 @@ class ProductController extends Controller
         $Manufacturers = $this->ManuService->GetAll();
         $query = $request->get('search');
 
-        $perpage = 12;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+//        $perpage = 12;
+//        $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $products = $this->productService->SearchProduct($query);
-        $paginator = new LengthAwarePaginator($products, count($products), $perpage, $currentPage);
+//        $paginator = new LengthAwarePaginator($products, count($products), $perpage, $currentPage);
         return view(
             'admin/product',
             compact(
-                'paginator',
                 'products',
                 'categories',
                 'Manufacturers',

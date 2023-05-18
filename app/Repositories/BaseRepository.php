@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\ProductDomain;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-
+//use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 class BaseRepository
 {
     protected Model $model;
@@ -21,22 +22,25 @@ class BaseRepository
 
     public function all()
     {
-        return $this->model->newModelQuery()->get();
+        return $this->model->all();
     }
-    public function findById($id)
+    public function findById($id): ProductDomain
     {
-        return $this->model->newModelQuery()->find($id);
-    }
-
-    public function create(array $data)
-    {
-        return $this->model->create($data);
+        $data = $this->model->newModelQuery()->find($id);
+        return $data->convertToDomain();
     }
 
-    public function update($id, array $data)
+    public function create(array $data): ProductDomain
     {
-        $find_id = $this->findById($id);
-        return $find_id->update($data);
+        $data = $this->model->create($data);
+        return $data->convertToDomain();
+    }
+
+    public function update($id, array $data): ProductDomain
+    {
+        $find_id = $this->model->findOrFail($id);
+        $find_id->update($data);
+        return $find_id->convertToDomain();
     }
     public function delete($id)
     {

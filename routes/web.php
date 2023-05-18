@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('search', [ProductController::class, 'search_admin'])->name('product.search');
+Route::get('/', [ProductController::class, 'getAllproduct'])->name('trangchu');
+Route::resource('product', ProductController::class);
 
 Route::group(
     [
@@ -34,9 +38,8 @@ Route::group(
 
         Route::middleware(['auth'])->group(function () {
             Route::post('/logout',[LoginController::class, 'logout'])->name('logout_success');
-            Route::resource('product', ProductController::class);
-            Route::get('search', [ProductController::class, 'search_admin'])->name('product.search');
-            Route::get('/', [ProductController::class, 'getAllproduct'])->name('trangchu');
+
         });
     }
 );
+

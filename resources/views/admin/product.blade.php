@@ -31,23 +31,23 @@
             </div>
         </form>
         <div class="filter2">
-            @if(count($paginator) > 0)
+            @if(count($products) > 0)
                 <div class="all-product">
-                    @foreach($paginator as $item)
+                    @foreach($products as $item)
                         <div class="product">
                             <div class="product-img">
-                                <img class="product-img-1" src="{{ asset('/images/'.$item->image) }}">
+                                <img class="product-img-1" src="{{ asset('/images/'.$item->getImage()) }}">
                             </div>
                             <div class="product-name-price">
                                 <div class="product-name">
-                                    <a class="product-name-1 elipsis1" href="{{route('product.show', $item->id )}}">{{$item->name}}</a>
+                                    <a class="product-name-1 elipsis1" href="{{route('product.show', $item->getId() )}}">{{$item->getName()}}</a>
                                 </div>
                             </div>
                             <div class="button-update-delete">
-                                <div class="id-pro" data-id="{{$item->id}}" hidden></div>
+                                <div class="id-pro" data-id="{{$item->getId()}}" hidden></div>
                                 <div class="product-update">
                                     <div class="product-update-button">
-                                        <a class="product-update-button-1" href="{{route('product.edit', $item->id)}}">Update</a>
+                                        <a class="product-update-button-1" href="{{route('product.edit', $item->getId())}}">Update</a>
                                     </div>
                                 </div>
                                 <div class="product-delete">
@@ -61,7 +61,7 @@
                     @endforeach
                 </div>
                 <div class="pagi">
-                    {{ $paginator->links('custom-pagination', ['pagination' => $paginator]) }}
+{{--                    {{ $paginator->links('custom-pagination', ['pagination' => $paginator]) }}--}}
                 </div>
             @else
                 <div id="no-products">Không có sản phẩm</div>

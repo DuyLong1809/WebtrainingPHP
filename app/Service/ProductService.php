@@ -28,10 +28,26 @@ class ProductService
 
     public function getAllProduct()
     {
+        return $this->productRepository->convertall();
+    }
+
+    public function AllProduct()
+    {
         return $this->productRepository->all();
     }
 
-    public function getProductById($id)
+
+    public function getNameCateById($id)
+    {
+        return $this->productRepository->findCateById($id);
+    }
+
+    public function getNameManuById($id)
+    {
+        return $this->productRepository->findManuById($id);
+    }
+
+    public function getProductId($id)
     {
         return $this->productRepository->findById($id);
     }
@@ -63,7 +79,7 @@ class ProductService
 //-----------Xử Lý Ảnh------------------
         $product = $this->productRepository->findById($id);
         if (isset($request['image'])) {
-            $img = public_path('/images/' . $product->image);
+            $img = public_path('/images/' . $product->getImage());
             if ($img) {
                 unlink($img);
             }
@@ -73,7 +89,7 @@ class ProductService
             $image = $file->move(public_path('images'), $imageName);
             $data['image'] = $image->getBasename();
         } else {
-            $data['image'] = $product->image;
+            $data['image'] = $product->getImage();
         }
 //--------------------------------------
         return $this->productRepository->update($id, $data);
@@ -123,8 +139,8 @@ class ProductService
 
     public function DeleteProduct($id)
     {
-        $product = $this->getProductById($id);
-        $image = public_path('images/' . $product->image);
+        $product = $this->getProductId($id);
+        $image = public_path('images/' . $product->getImage());
         if ($image) {
             unlink($image);
         }

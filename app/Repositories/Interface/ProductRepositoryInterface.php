@@ -2,15 +2,21 @@
 
 namespace App\Repositories\Interface;
 
+use App\Models\ProductDomain;
+
 interface ProductRepositoryInterface
 {
     public function all();
 
-    public function findById($id);
+    public function convertall(): ?array;
+    public function findById($id):? ProductDomain;
 
-    public function create(array $data);
+    public function findCateById($id);
 
-    public function update($id, array $data);
+    public function findManuById($id);
+    public function create(array $data):? ProductDomain;
+
+    public function update($id, array $data):? ProductDomain;
 
     public function delete($id);
 
