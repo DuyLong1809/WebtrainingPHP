@@ -20,10 +20,8 @@ class ProductService
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        Img_slideRepositoryInterface $img_slideRepository,
     ) {
         $this->productRepository = $productRepository;
-        $this->img_slideRepository = $img_slideRepository;
     }
 
     public function getAllProduct()
@@ -97,48 +95,6 @@ class ProductService
         }
 //--------------------------------------
         return $this->productRepository->update($id, $data);
-    }
-
-    public function UpdateImgSlide($id, Request $request)
-    {
-        if ($request->hasFile('image_slide')) {
-            foreach ($request['image_slide'] as $key => $value) {
-                $idImgSlider = $request['idImgSlider'];
-                $idImg = $idImgSlider[$key];
-                if ($idImg) {
-                    $extension = $value->getClientOriginalExtension();
-                    $imageName = rand(0, 999) . '.' . $extension;
-                    $image = $value->move(public_path('image_slide'), $imageName);
-                    $item_img = $image->getBasename();
-                    $data_slide = [
-                        'name_imgslide' => $item_img,
-                    ];
-                    $img_product = $this->img_slideRepository->findById($idImg);
-                    $img_product->update($data_slide);
-                } else {
-                    $extension = $value->getClientOriginalExtension();
-                    $imageName = rand(0, 999) . '.' . $extension;
-                    $image = $value->move(public_path('image_slide'), $imageName);
-                    $item_img = $image->getBasename();
-                    $data_slide = [
-                        'name_imgslide' => $item_img,
-                        'id_product' => $id,
-                    ];
-                    $this->img_slideRepository->create($data_slide);
-                }
-            }
-        }
-
-        if (isset($request['idImageDelete'])) {
-            foreach ($request['idImageDelete'] as $del_img) {
-                if ($del_img) {
-                    $product = $this->img_slideRepository->findById($del_img);
-                    $image_slide = public_path('/image_slide/' . $product->name_imgslide);
-                    unlink($image_slide);
-                    $del = $this->img_slideRepository->delete($del_img);
-                }
-            }
-        }
     }
 
     public function DeleteProduct($id)

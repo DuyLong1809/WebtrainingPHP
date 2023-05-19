@@ -3,20 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
+use Jenssegers\Mongodb\Eloquent\Model;
 class Category extends Model
 {
-    use HasFactory;
-
-    protected $table = 'category';
+    protected $collection = 'Category_collection';
     protected $fillable =
         [
             'name_cate',
         ];
 
-    public function product()
+    public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'id_cate');
     }
+
+//    public function product_collection()
+//    {
+//        return $this->embedsMany(Product_::class, 'product_collection');
+//    }
+    use HasFactory;
 }

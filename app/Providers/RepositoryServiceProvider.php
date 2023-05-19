@@ -27,7 +27,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepositoryInterface::class, CategoryCollectionRepository::class);
         $this->app->bind(ManufacturerRepositoryInterface::class, ManufacturerCollectionRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductCollectionRepository::class);
-        $this->app->bind(Img_slideRepositoryInterface::class, Img_slideCollectionRepository::class);
     }
 
     /**

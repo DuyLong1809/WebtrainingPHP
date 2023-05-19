@@ -60,7 +60,7 @@
                             </div>
                             <div class="select_cate">
                                 <select name="id_manufact" id="" class="">
-                                    @foreach($Manufacturers as $manu)
+                                    @foreach($manufacturers as $manu)
                                         <option
                                             value="{{$manu->id}}" {{$product->getIdManufact() == $manu->id ? 'selected':""}}>{{$manu->name_manufact}}</option>
                                     @endforeach
@@ -114,23 +114,23 @@
                             Ảnh slide
                         </div>
                         <div class="img-slide-all">
-                            @foreach($img_slide as $index => $productimgslide)
-                            <div class="img-slide imgframe">
-                                <div class="img-and-text-slide">
-                                    <div class="text-slide">Ảnh {{$index + 1}}</div>
-                                    <div class="img-slide-small">
-                                        <input type="text" hidden name="idImgSlider[]" value="{{$productimgslide->id}}" id="idImage">
-                                        <img class="slide-img" src="{{asset('/image_slide/'.$productimgslide->name_imgslide)}}">
-                                        <div class="update-delete-img-sub">
-                                            <div class="update-img-sub" onclick="image_upload(this)">Cập nhật</div>
-                                            <input type="file" value="{{$productimgslide->id}}" name="image_slide[]" id="image_slide" class="input-update-img" hidden>
-                                            <div class="delete-img-sub" onclick="image_delete(this)">Xóa</div>
-                                            <input type="text" name="idImageDelete[]" hidden value="" id="getIdImage">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
+{{--                            @foreach($img_slide as $index => $productimgslide)--}}
+{{--                            <div class="img-slide imgframe">--}}
+{{--                                <div class="img-and-text-slide">--}}
+{{--                                    <div class="text-slide">Ảnh {{$index + 1}}</div>--}}
+{{--                                    <div class="img-slide-small">--}}
+{{--                                        <input type="text" hidden name="idImgSlider[]" value="{{$productimgslide->id}}" id="idImage">--}}
+{{--                                        <img class="slide-img" src="{{asset('/image_slide/'.$productimgslide->name_imgslide)}}">--}}
+{{--                                        <div class="update-delete-img-sub">--}}
+{{--                                            <div class="update-img-sub" onclick="image_upload(this)">Cập nhật</div>--}}
+{{--                                            <input type="file" value="{{$productimgslide->id}}" name="image_slide[]" id="image_slide" class="input-update-img" hidden>--}}
+{{--                                            <div class="delete-img-sub" onclick="image_delete(this)">Xóa</div>--}}
+{{--                                            <input type="text" name="idImageDelete[]" hidden value="" id="getIdImage">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            @endforeach--}}
                             <div class="img-slide imgframe1">
                                 <div class="img-and-text-slide">
                                     <div class="text-slide">

@@ -2,17 +2,18 @@
 
 namespace App\Repositories\MongoDB;
 
-use App\Models\Category_collection;
-use App\Models\Manufacturer_collection;
-use App\Models\Product_collection;
+use App\Models\Category;
+use App\Models\Manufacturer;
+use App\Models\Product;
 use App\Models\ProductDetailDomain;
 use App\Models\ProductDomain;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interface;
+use Illuminate\Support\Collection;
 
 class ProductCollectionRepository extends BaseRepository implements Interface\ProductRepositoryInterface
 {
-    public function __construct(Product_collection $productmodel)
+    public function __construct(Product $productmodel)
     {
         $this->model = $productmodel;
     }
@@ -26,15 +27,19 @@ class ProductCollectionRepository extends BaseRepository implements Interface\Pr
         $data = $this->model->newModelQuery()->find($id);
         return $data->convertToDomainDetail();
     }
-    public function convertall(): array
+    public function convertall(): Collection
     {
-        return $this->model->convertToDomainAll();
+        $data = $this->model->all();
+        $convertedModels = $data->map(function ($model) {
+            return $model->convertToDomain();
+        });
+        return $convertedModels;
     }
     public function findCateById($id)
     {
         $product_cate =  $this->model->find($id);
         $category_id = $product_cate->id_cate;
-        $category = Category_collection::where('_id', $category_id)->first();
+        $category = Category::where('_id', $category_id)->first();
         $category_name = $category->name_cate;
         return $category_name;
     }
@@ -43,12 +48,12 @@ class ProductCollectionRepository extends BaseRepository implements Interface\Pr
     {
         $product_Manu =  $this->model->find($id);
         $manufacturer_id = $product_Manu->id_manufact;
-        $manufacturer = Manufacturer_collection::where('_id', $manufacturer_id)->first();
+        $manufacturer = Manufacturer::where('_id', $manufacturer_id)->first();
         $manufacturer_name = $manufacturer->name_manufact;
         return $manufacturer_name;
     }
 
-    public function search($name)
+    public function search($name): Collection
     {
         $data = $this->model->newModelQuery()->where('name', 'like', '%' . $name . '%')->get();
         $convertedModels = $data->map(function ($model) {
@@ -74,4 +79,5 @@ class ProductCollectionRepository extends BaseRepository implements Interface\Pr
         });
         return $convertedModels;
     }
+
 }

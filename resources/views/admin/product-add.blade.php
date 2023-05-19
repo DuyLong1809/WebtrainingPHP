@@ -45,7 +45,7 @@
                     <div class="select_cate">
                         <select name="id_manufact" id="" class="">
                             <option value="0">Chọn hãng sản xuất</option>
-                            @foreach($Manufacturers as $manu)
+                            @foreach($manufacturers as $manu)
                                 <option value="{{$manu->id}}">{{$manu->name_manufact}}</option>
                             @endforeach
                         </select>

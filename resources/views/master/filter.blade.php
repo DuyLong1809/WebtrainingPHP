@@ -19,7 +19,7 @@
         </div>
         <div class="subcategory_sanxuat">
             <div class="subcategory_filter"><a href="{{route('product.index')}}" class="color_filter">All</a></div>
-            @foreach($Manufacturers as $manu)
+            @foreach($manufacturers as $manu)
                 <div class="subcategory_filter"><a  href="{{route('product.index', ['id_manu'=> $manu->id])}}" class="color_filter">{{$manu->name_manufact}}</a></div>
             @endforeach
         </div>
