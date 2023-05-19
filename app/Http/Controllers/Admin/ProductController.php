@@ -14,18 +14,18 @@ class ProductController extends Controller
 {
     protected $productService;
     protected $categoryService;
-    protected $ManuService;
+    protected $manuService;
     protected $img_slide;
 
     public function __construct
     (
         ProductService $productService,
         CategoryService $categoryService,
-        ManufacturerService $ManuService,
+        ManufacturerService $manuService,
     ) {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
-        $this->ManuService = $ManuService;
+        $this->manuService = $manuService;
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductController extends Controller
         $products = $this->productService->getAllProduct();
         $categories = $this->categoryService->getAllCategory();
         $cate_id = $request->input('id_cate');
-        $manufacturers = $this->ManuService->GetAll();
+        $manufacturers = $this->manuService->GetAll();
         $manu_id = $request->input('id_manu');
         if ($cate_id) {
             $products = $this->productService->getCategoryById($cate_id);
@@ -59,7 +59,7 @@ class ProductController extends Controller
     {
         $products = $this->productService->getAllProduct();
         $categories = $this->categoryService->getAllCategory();
-        $manufacturers = $this->ManuService->GetAll();
+        $manufacturers = $this->manuService->GetAll();
         return view(
             'index',
             compact(
@@ -101,7 +101,7 @@ class ProductController extends Controller
     {
         $product = $this->productService->getProductIdDetail($id);
         $categories = $this->categoryService->getAllCategory();
-        $manufacturers = $this->ManuService->GetAll();
+        $manufacturers = $this->manuService->GetAll();
         $id_cate = $this->productService->getProductId($id)->getIdCate();
         $products = $this->productService->AllProduct()->where('id_cate', $id_cate)->take(3);
         return view(
@@ -124,7 +124,7 @@ class ProductController extends Controller
     {
         $product = $this->productService->getProductId($id);
         $categories = $this->categoryService->getAllCategory();
-        $manufacturers = $this->ManuService->GetAll();
+        $manufacturers = $this->manuService->GetAll();
         return view(
             'admin/product-update',
             compact(
@@ -162,7 +162,7 @@ class ProductController extends Controller
     public function search_admin(Request $request)
     {
         $categories = $this->categoryService->getAllCategory();
-        $manufacturers = $this->ManuService->GetAll();
+        $manufacturers = $this->manuService->GetAll();
         $query = $request->get('search');
         $products = $this->productService->SearchProduct($query);
         return view(
