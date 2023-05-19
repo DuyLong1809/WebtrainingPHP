@@ -115,24 +115,25 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $cate_id = $this->productService->getNameCateById($id);
-        $manu_id = $this->productService->getNameManuById($id);
-        $product = $this->productService->getProductId($id);
+//        $cate_id = $this->productService->getNameCateById($id);
+//        $manu_id = $this->productService->getNameManuById($id);
+        $product = $this->productService->getProductIdDetail($id);
+//        dd($product);
         $categories = $this->categoryService->getAllCategory();
         $Manufacturers = $this->ManuService->GetAll();
-        $id_cate = $product->getIdCate();
+        $id_cate = $this->productService->getProductId($id)->getIdCate();
         $products = $this->productService->AllProduct()->where('id_cate', $id_cate)->take(3);
-        $relatedProducts = $this->productService->AllProduct()->where('id_cate', $id_cate)->where('_id', '!=', $id);
+//        $relatedProducts = $this->productService->AllProduct()->where('id_cate', $id_cate)->where('_id', '!=', $id);
         return view(
             'detail',
             compact(
                 'Manufacturers',
                 'categories',
                 'product',
-                'cate_id',
-                'manu_id',
+//                'cate_id',
+//                'manu_id',
                 'products',
-                'relatedProducts',
+//                'relatedProducts',
             ));
     }
 

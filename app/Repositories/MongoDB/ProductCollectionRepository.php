@@ -5,6 +5,7 @@ namespace App\Repositories\MongoDB;
 use App\Models\Category_collection;
 use App\Models\Manufacturer_collection;
 use App\Models\Product_collection;
+use App\Models\ProductDetailDomain;
 use App\Models\ProductDomain;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interface;
@@ -16,6 +17,15 @@ class ProductCollectionRepository extends BaseRepository implements Interface\Pr
         $this->model = $productmodel;
     }
 
+    /**
+     * @param $id
+     * @return ProductDetailDomain
+     */
+    public function findByIdDetail($id): ProductDetailDomain
+    {
+        $data = $this->model->newModelQuery()->find($id);
+        return $data->convertToDomainDetail();
+    }
     public function convertall(): array
     {
         return $this->model->convertToDomainAll();

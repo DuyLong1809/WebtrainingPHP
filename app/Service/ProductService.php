@@ -51,6 +51,10 @@ class ProductService
     {
         return $this->productRepository->findById($id);
     }
+    public function getProductIdDetail($id)
+    {
+        return $this->productRepository->findByIdDetail($id);
+    }
 
     public function createProduct(ProductRequest $request)
     {

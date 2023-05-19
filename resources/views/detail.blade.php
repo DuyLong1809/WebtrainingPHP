@@ -26,8 +26,8 @@
         <div class="detail-content-image">
             <div class="detail-content">
                 <h3 class="detail-title">{{$product->getName()}}</h3>
-                <p class="detail-content-1">Category: {{$cate_id}}</p>
-                <p class="detail-content-1">Manufacturer: {{$manu_id}}</p>
+                <p class="detail-content-1">Category: {{$product->getNameCate()}}</p>
+                <p class="detail-content-1">Manufacturer: {{$product->getNameManufact()}}</p>
                 <p class="detail-content-1">Price: {{$product->getPrice()}}</p>
                 <div class="detail-des">
                     <p class="detail-des-1">Product Description:</p>

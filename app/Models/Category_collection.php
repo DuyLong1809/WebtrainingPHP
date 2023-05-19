@@ -12,9 +12,14 @@ class Category_collection extends Model
             'name_cate',
         ];
 
-    public function product_collection()
+    public function products()
     {
-        return $this->embedsMany(Product_collection::class, 'product_collection');
+        return $this->hasMany(Product_collection::class, 'id_cate');
     }
+
+//    public function product_collection()
+//    {
+//        return $this->embedsMany(Product_collection::class, 'product_collection');
+//    }
     use HasFactory;
 }

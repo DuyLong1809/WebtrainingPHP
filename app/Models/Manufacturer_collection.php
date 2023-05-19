@@ -17,5 +17,11 @@ class Manufacturer_collection extends Model
     {
         return $this->embedsMany(Product_collection::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product_collection::class, 'id_manufact');
+    }
+
     use HasFactory;
 }

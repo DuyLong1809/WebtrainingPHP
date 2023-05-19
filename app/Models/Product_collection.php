@@ -18,6 +18,17 @@ class Product_collection extends Model
             'mota',
         ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category_collection::class, 'id_cate');
+    }
+
+    public function manufacturer()
+    {
+        return $this->belongsTo(Manufacturer_collection::class, 'id_manufact');
+    }
+
+
     public function category_collection()
     {
         return $this->embedsOne(Category_collection::class, 'category_collection');
@@ -36,9 +47,13 @@ class Product_collection extends Model
     public function convertToDomainAll(): array
     {
         $products = $this->all();
+//        $products = $this->with('category')->get();
+
         $productDomains = [];
 
         foreach ($products as $product) {
+//            dd($products, $product->category->name_cate);
+
             $productDomain = new ProductDomain(
                 $product->id,
                 $product->name,
@@ -56,6 +71,7 @@ class Product_collection extends Model
     }
     public function convertToDomain()
     {
+//        dd($this->category);
         $model = new ProductDomain(
             $this->id,
             $this->name,
@@ -64,6 +80,20 @@ class Product_collection extends Model
             $this->mota,
             $this->id_cate,
             $this->id_manufact,
+        );
+        return $model;
+    }
+
+    public function convertToDomainDetail()
+    {
+        $model = new ProductDetailDomain(
+            $this->id,
+            $this->name,
+            $this->price,
+            $this->image,
+            $this->mota,
+            $this->category->name_cate,
+            $this->manufacturer->name_manufact,
         );
         return $model;
     }
